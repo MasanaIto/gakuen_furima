@@ -14132,8 +14132,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 return _this.$store.dispatch('auth/login', _this.loginForm);
 
               case 2:
-                // トップページに移動する
-                _this.$router.push('/');
+                if (_this.apiStatus) {
+                  // トップページに移動する
+                  _this.$router.push('/');
+                }
 
               case 3:
               case "end":
@@ -14165,6 +14167,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
           }
         }, _callee2);
       }))();
+    }
+  },
+  computed: {
+    apiStatus: function apiStatus() {
+      return this.$store.state.auth.apiStatus;
     }
   }
 });
@@ -20627,6 +20634,7 @@ var actions = {
         while (1) {
           switch (_context2.prev = _context2.next) {
             case 0:
+              // 最初はnull
               context.commit('setApiStatus', null);
               _context2.next = 3;
               return axios.post('/api/login', data)["catch"](function (err) {
@@ -20641,11 +20649,13 @@ var actions = {
                 break;
               }
 
+              // 成功したらtrue
               context.commit('setApiStatus', true);
               context.commit('setUser', response.data);
               return _context2.abrupt("return", false);
 
             case 8:
+              // 失敗だったらfalse
               context.commit('setApiStatus', false);
               context.commit('error/setCode', response.status, {
                 root: true

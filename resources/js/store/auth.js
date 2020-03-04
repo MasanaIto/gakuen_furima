@@ -25,16 +25,19 @@ const actions = {
         context.commit('setUser', response.data)
     },
     async login (context, data) {
+        // 最初はnull
         context.commit('setApiStatus', null)
         const response = await axios.post('/api/login', data)
           .catch(err => err.response || err)
       
         if (response.status === OK) {
-          context.commit('setApiStatus', true)
-          context.commit('setUser', response.data)
-          return false
+            // 成功したらtrue
+            context.commit('setApiStatus', true)
+            context.commit('setUser', response.data)
+            return false
         }
       
+        // 失敗だったらfalse
         context.commit('setApiStatus', false)
         context.commit('error/setCode', response.status, { root: true })
     },
