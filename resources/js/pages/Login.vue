@@ -25,7 +25,21 @@
             </form>
         </div>
     </div>
-    <div class="panel" v-show="tab === 2">Register Form</div>
+    <div class="panel" v-show="tab === 2">
+        <form class="form" @submit.prevent="register">
+            <label for="username">ユーザー名</label>
+            <input type="text" class="form__item" id="username" v-model="registerForm.name">
+            <label for="email">メールアドレス</label>
+            <input type="text" class="form__item" id="email" v-model="registerForm.email">
+            <label for="password">パスワード</label>
+            <input type="password" class="form__item" id="password" v-model="registerForm.password">
+            <label for="password-confirmation">パスワード（再入力）</label>
+            <input type="password" class="form__item" id="password-confirmation" v-model="registerForm.password_confirmation">
+            <div class="form__button">
+                <button type="submit" class="button button--inverse">登録</button>
+            </div>
+        </form>
+    </div>
   </div>
 </template>
 
@@ -37,12 +51,21 @@ export default {
       loginForm: {
           email: '',
           password: ''
+      },
+      registerForm: {
+          name: '',
+          email: '',
+          password: '',
+          password_confirmation: ''
       }
     }
   },
   methods: {
       login () {
           console.log(this.loginForm)
+      },
+      register () {
+          console.log(this.registerForm)
       }
   }
 }
