@@ -15464,13 +15464,11 @@ var render = function() {
             { staticClass: "button button--link", on: { click: _vm.logout } },
             [_vm._v("\n    ログアウト\n  ")]
           )
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "RouterLink",
-        { staticClass: "button button--link", attrs: { to: "/login" } },
-        [_vm._v("\n    ログイン / 新規登録\n  ")]
-      )
+        : _c(
+            "RouterLink",
+            { staticClass: "button button--link", attrs: { to: "/login" } },
+            [_vm._v("\n    ログイン / 新規登録\n  ")]
+          )
     ],
     1
   )
