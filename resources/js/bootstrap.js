@@ -1,9 +1,6 @@
 import { getCookieValue } from './util'
 
-window.axios.interceptors.response.use(
-    response => response,
-    error => error.response || error
-)
+window.axios = require('axios')
 
 // Ajaxリクエストであることを示すヘッダーを付与する
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest'
@@ -14,3 +11,8 @@ window.axios.interceptors.request.use(config => {
 
   return config
 })
+
+window.axios.interceptors.response.use(
+    response => response,
+    error => error.response || error
+)
